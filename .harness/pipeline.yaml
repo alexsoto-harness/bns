@@ -53,6 +53,9 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+        sendGitStatus:
+          enabled: true
+          name: dev-deploy
     - stage:
         name: Deploy to Staging
         identifier: deploy_to_staging
@@ -91,6 +94,9 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+        sendGitStatus:
+          enabled: true
+          name: stage-deploy
     - stage:
         name: Approval
         identifier: approval
@@ -112,6 +118,9 @@ pipeline:
                       userGroups:
                         - _project_all_users
                     isAutoRejectEnabled: false
+        sendGitStatus:
+          enabled: true
+          name: prod-approval
     - stage:
         name: Deploy to Prod
         identifier: deploy_to_prod
@@ -150,3 +159,6 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+        sendGitStatus:
+          enabled: true
+          name: prod-deploy
