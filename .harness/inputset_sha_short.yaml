@@ -1,0 +1,25 @@
+inputSet:
+  name: SHA Short Tag
+  identifier: sha_short_tag
+  orgIdentifier: sandbox
+  projectIdentifier: soto_sandbox
+  pipeline:
+    identifier: bns_spring_boot_deploy
+    stages:
+      - stage:
+          identifier: deploy_to_dev
+          type: Deployment
+          spec:
+            service:
+              serviceInputs:
+                serviceDefinition:
+                  type: Kubernetes
+                  spec:
+                    artifacts:
+                      primary:
+                        primaryArtifactRef: bns_spring_boot_dockerhub
+                        sources:
+                          - identifier: bns_spring_boot_dockerhub
+                            type: DockerRegistry
+                            spec:
+                              tag: <+trigger.artifact.build>
