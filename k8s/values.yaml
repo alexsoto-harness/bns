@@ -1,11 +1,8 @@
-name: harness-example
+name: bns-spring-boot
 replicas: 1
 
 image: <+artifact.image>
 dockercfg: <+artifact.imagePullSecret>
-
-createNamespace: true
-namespace: <+infra.namespace>
 
 # Service Type allow you to specify what kind of service you want.
 # Possible values for ServiceVariableType are:
@@ -14,8 +11,8 @@ serviceType: LoadBalancer
 
 # A Service can map an incoming port to any targetPort.
 # targetPort is where application is listening on inside the container.
-servicePort: 80
-serviceTargetPort: 80
+servicePort: 8080
+serviceTargetPort: 8080
 
 # Specify all environment variables to be added to the container.
 # The following two maps, config and secrets, are put into a ConfigMap
