@@ -6,7 +6,7 @@ Spring Boot 3.2 demo app with a full CI/CD pipeline targeting Kubernetes.
 
 - **Java 17** / **Spring Boot 3.2.5** (Maven)
 - **Docker** (Eclipse Temurin 17 Alpine)
-- **Kubernetes** (Helm-style manifests in `k8s/`)
+- **Kubernetes** (Go template manifests in `k8s/`)
 
 ## Endpoints
 
