@@ -1,0 +1,25 @@
+trigger:
+  name: DockerHub SHA Short Tag
+  identifier: dockerhub_sha_short_tag
+  enabled: true
+  tags: {}
+  orgIdentifier: sandbox
+  projectIdentifier: soto_sandbox
+  pipelineIdentifier: bns_spring_boot_deploy
+  stagesToExecute: []
+  source:
+    type: Artifact
+    spec:
+      type: DockerRegistry
+      spec:
+        connectorRef: dockerhubalexsotoharness
+        imagePath: alexsotoharness/bns_spring_boot
+        tag: <+trigger.artifact.build>
+        eventConditions:
+          - key: build
+            operator: Regex
+            value: ^[0-9a-f]{7,}$
+  pipelineBranchName: main
+  inputSetBranchName: main
+  inputSetRefs:
+    - sha_short_tag

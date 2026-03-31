@@ -1,0 +1,34 @@
+service:
+  name: bns_spring_boot
+  identifier: bns_spring_boot
+  orgIdentifier: sandbox
+  projectIdentifier: soto_sandbox
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      manifests:
+        - manifest:
+            identifier: k8s_templates
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: alexsotoharness
+                  gitFetchType: Branch
+                  paths:
+                    - k8s/templates
+                  repoName: bns
+                  branch: main
+              valuesPaths:
+                - k8s/values.yaml
+      artifacts:
+        primary:
+          primaryArtifactRef: bns_spring_boot_dockerhub
+          sources:
+            - identifier: bns_spring_boot_dockerhub
+              type: DockerRegistry
+              spec:
+                connectorRef: dockerhubalexsotoharness
+                imagePath: alexsotoharness/bns_spring_boot
+                tag: <+input>

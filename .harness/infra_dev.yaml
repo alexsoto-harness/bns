@@ -1,0 +1,13 @@
+infrastructureDefinition:
+  name: GKE Sandbox Dev
+  identifier: gke_sandbox_dev
+  orgIdentifier: sandbox
+  projectIdentifier: soto_sandbox
+  environmentRef: Dev
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: gkesandbox
+    namespace: soto-dev
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: false

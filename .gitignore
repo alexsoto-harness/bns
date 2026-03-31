@@ -5,6 +5,7 @@ target/
 .idea/
 *.iml
 .vscode/
+.cursor/
 .project
 .classpath
 .settings/
