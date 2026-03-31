@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Banking and Markets &ndash; Scotiabank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        scotia: {
+                            red: '#ec111a',
+                            darkred: '#b5000a',
+                            dark: '#1a1a2e',
+                            navy: '#0f172a',
+                            gray: '#4a4a4a',
+                            lightgray: '#f5f5f5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .hero-slide { animation: fadeSlide 12s infinite; opacity: 0; position: absolute; inset: 0; }
+        .hero-slide:nth-child(1) { animation-delay: 0s; }
+        .hero-slide:nth-child(2) { animation-delay: 4s; }
+        .hero-slide:nth-child(3) { animation-delay: 8s; }
+        @keyframes fadeSlide {
+            0%,8% { opacity: 0; transform: translateY(20px); }
+            12%,30% { opacity: 1; transform: translateY(0); }
+            34%,100% { opacity: 0; transform: translateY(-20px); }
+        }
+        .stat-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.1); }
+        .tab-btn.active { border-bottom: 3px solid #ec111a; color: #ec111a; font-weight: 600; }
+        .tab-content { display: none; animation: tabFade 0.4s ease; }
+        .tab-content.active { display: block; }
+        @keyframes tabFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .insight-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .insight-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #ec111a; transition: width 0.3s; }
+        .nav-link:hover::after { width: 100%; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-sans antialiased">
+
+    <!-- Top Bar -->
+    <div class="bg-scotia-navy text-white text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-8">
+            <div class="flex items-center gap-4">
+                <a href="#" class="hover:text-red-300 transition-colors">Personal</a>
+                <a href="#" class="hover:text-red-300 transition-colors">Business</a>
+                <a href="#" class="hover:text-red-300 transition-colors">Commercial</a>
+                <a href="#" class="text-red-400 font-semibold">Global Markets</a>
+                <a href="#" class="hover:text-red-300 transition-colors">Global Wealth</a>
+                <a href="#" class="hover:text-red-300 transition-colors">About Us</a>
+                <a href="#" class="hover:text-red-300 transition-colors">Investors</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="#" class="hover:text-red-300 transition-colors">More sites</a>
+                <span class="text-gray-500">|</span>
+                <span class="text-white font-semibold">EN</span>
+                <a href="#" class="text-gray-400 hover:text-red-300 transition-colors">FR</a>
+                <a href="#" class="text-gray-400 hover:text-red-300 transition-colors">ES</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Nav -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <!-- Scotiabank Logo -->
+                <div class="flex items-center gap-2">
+                    <div class="bg-scotia-red rounded-full w-8 h-8 flex items-center justify-center">
+                        <span class="text-white font-extrabold text-sm">S</span>
+                    </div>
+                    <div>
+                        <span class="text-lg font-bold text-scotia-navy tracking-tight">Scotiabank</span>
+                        <span class="text-xs text-gray-500 block -mt-1">Global Banking &amp; Markets</span>
+                    </div>
+                </div>
+                <nav class="hidden lg:flex items-center gap-6 text-sm text-gray-600">
+                    <a href="#insights" class="nav-link hover:text-scotia-red transition-colors">Market Insights</a>
+                    <a href="#services" class="nav-link hover:text-scotia-red transition-colors">Services</a>
+                    <a href="#" class="nav-link hover:text-scotia-red transition-colors">Industries</a>
+                    <a href="#" class="nav-link hover:text-scotia-red transition-colors">Global Presence</a>
+                    <a href="#about" class="nav-link hover:text-scotia-red transition-colors">About Us</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="text-gray-500 hover:text-scotia-red transition-colors">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="lg:hidden text-gray-500 hover:text-scotia-red">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Rotating Headlines -->
+    <section class="relative bg-gradient-to-br from-scotia-navy via-slate-800 to-slate-900 text-white overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-scotia-red rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-80 h-80 bg-red-600 rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+            <div class="relative h-48 md:h-40">
+                <!-- Slide 1 -->
+                <div class="hero-slide flex flex-col gap-4">
+                    <span class="text-red-400 text-sm font-semibold uppercase tracking-wider">Leadership</span>
+                    <h1 class="text-3xl md:text-5xl font-extrabold leading-tight max-w-3xl">Scotiabank celebrates official opening of new regional hub in Dallas</h1>
+                    <a href="#" class="text-red-300 hover:text-white font-medium text-sm inline-flex items-center gap-2 transition-colors">Read article <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <!-- Slide 2 -->
+                <div class="hero-slide flex flex-col gap-4">
+                    <span class="text-red-400 text-sm font-semibold uppercase tracking-wider">Podcast</span>
+                    <h1 class="text-3xl md:text-5xl font-extrabold leading-tight max-w-3xl">2026 Debt Capital Markets Outlook</h1>
+                    <a href="#" class="text-red-300 hover:text-white font-medium text-sm inline-flex items-center gap-2 transition-colors">Listen to podcast <i class="fa-solid fa-headphones"></i></a>
+                </div>
+                <!-- Slide 3 -->
+                <div class="hero-slide flex flex-col gap-4">
+                    <span class="text-red-400 text-sm font-semibold uppercase tracking-wider">Risk Management</span>
+                    <h1 class="text-3xl md:text-5xl font-extrabold leading-tight max-w-3xl">Staying agile in a volatile market</h1>
+                    <a href="#" class="text-red-300 hover:text-white font-medium text-sm inline-flex items-center gap-2 transition-colors">Read article <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scale Banner -->
+    <section class="bg-scotia-red text-white py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-xl md:text-2xl font-bold">The only bank with scale across Canada, U.S., and Mexico</h2>
+        </div>
+    </section>
+
+    <!-- Stats Grid -->
+    <section class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div class="stat-card bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl md:text-3xl font-extrabold text-scotia-navy">C$1.46T</div>
+                    <div class="text-xs text-gray-500 mt-1">Total Assets</div>
+                </div>
+                <div class="stat-card bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl md:text-3xl font-extrabold text-scotia-navy">C$114B</div>
+                    <div class="text-xs text-gray-500 mt-1">Market Capitalization</div>
+                </div>
+                <div class="stat-card bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl md:text-3xl font-extrabold text-scotia-navy">Aa2/A+</div>
+                    <div class="text-xs text-gray-500 mt-1">Moody's / S&amp;P Rating</div>
+                </div>
+                <div class="stat-card bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl md:text-3xl font-extrabold text-scotia-navy">21M+</div>
+                    <div class="text-xs text-gray-500 mt-1">Clients Worldwide</div>
+                </div>
+                <div class="stat-card bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl md:text-3xl font-extrabold text-scotia-navy">20+</div>
+                    <div class="text-xs text-gray-500 mt-1">Countries</div>
+                </div>
+                <div class="stat-card bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl md:text-3xl font-extrabold text-scotia-navy">#11</div>
+                    <div class="text-xs text-gray-500 mt-1">Foreign Bank in U.S.</div>
+                </div>
+            </div>
+            <p class="text-xs text-gray-400 text-center mt-4">Data as of Q4 2025</p>
+        </div>
+    </section>
+
+    <!-- Tabbed Content: About / Insights / Podcasts / Conferences -->
+    <section id="insights" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Tab Buttons -->
+            <div class="flex gap-8 border-b border-gray-200 mb-10">
+                <button onclick="switchTab('about')" class="tab-btn active pb-3 text-sm uppercase tracking-wider text-gray-500 hover:text-scotia-red transition-colors" id="tab-about">About Us</button>
+                <button onclick="switchTab('insights')" class="tab-btn pb-3 text-sm uppercase tracking-wider text-gray-500 hover:text-scotia-red transition-colors" id="tab-insights">Market Insights</button>
+                <button onclick="switchTab('podcasts')" class="tab-btn pb-3 text-sm uppercase tracking-wider text-gray-500 hover:text-scotia-red transition-colors" id="tab-podcasts">Podcasts</button>
+                <button onclick="switchTab('conferences')" class="tab-btn pb-3 text-sm uppercase tracking-wider text-gray-500 hover:text-scotia-red transition-colors" id="tab-conferences">Conferences</button>
+            </div>
+
+            <!-- About Tab -->
+            <div id="content-about" class="tab-content active">
+                <div class="grid lg:grid-cols-2 gap-12 items-start" id="about">
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-scotia-navy mb-4">Your gateway to global market connectivity and industry expertise</h2>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            As a full-service bank with over 190 years of experience, Scotiabank offers clients a range of financial services including lending, transaction services, investment banking advice, and access to capital markets. Operating in the U.S. since 1885, our dedicated leadership team is committed to strengthening our presence in the U.S. market and driving growth across North America.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 bg-scotia-red text-white px-6 py-3 rounded-lg font-semibold text-sm hover:bg-scotia-darkred transition-colors">
+                            Our Leadership <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-start gap-4">
+                            <div class="bg-scotia-red/10 text-scotia-red w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-play"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-scotia-navy text-sm">Seamlessly connecting North America</h4>
+                                <p class="text-xs text-gray-500 mt-1">As the only bank with scale across Canada, U.S. and Mexico, we ensure your business operates seamlessly across borders.</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-start gap-4">
+                            <div class="bg-scotia-red/10 text-scotia-red w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-play"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-scotia-navy text-sm">Intentional and generational growth: NYC &amp; Dallas</h4>
+                                <p class="text-xs text-gray-500 mt-1">Building a world-class headquarters with a state-of-the-art trading floor, closer to clients with more space to grow.</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-start gap-4">
+                            <div class="bg-scotia-red/10 text-scotia-red w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-play"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-scotia-navy text-sm">Official opening of new regional hub in Dallas</h4>
+                                <p class="text-xs text-gray-500 mt-1">A bold new chapter for Scotiabank, strategically connecting the North American Corridor.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sponsorships & Careers row -->
+                <div class="grid md:grid-cols-2 gap-8 mt-12">
+                    <div class="bg-gradient-to-br from-scotia-navy to-slate-800 rounded-xl p-8 text-white">
+                        <h3 class="text-lg font-bold mb-2">Global Sponsorships</h3>
+                        <p class="text-gray-300 text-sm mb-4">Scotiabank supports sponsorship initiatives that reach across the arts, hockey, football and golf landscapes.</p>
+                        <a href="#" class="text-red-300 hover:text-white text-sm font-semibold inline-flex items-center gap-1 transition-colors">
+                            Learn More <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                    <div class="bg-gradient-to-br from-scotia-red to-red-700 rounded-xl p-8 text-white">
+                        <h3 class="text-lg font-bold mb-2">Careers</h3>
+                        <p class="text-red-100 text-sm mb-4">Come be part of an innovative, global Capital Markets business with a growing platform in the United States.</p>
+                        <a href="#" class="text-white hover:text-red-200 text-sm font-semibold inline-flex items-center gap-1 transition-colors">
+                            Learn More <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Insights Tab -->
+            <div id="content-insights" class="tab-content">
+                <h2 class="text-2xl font-extrabold text-scotia-navy mb-2">Market Insights</h2>
+                <p class="text-gray-500 mb-8">Scotiabank leads market conversations, offering insights and content to drive your business forward in fast-paced markets.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="insight-card bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                        <div class="bg-gradient-to-r from-red-50 to-white p-1"></div>
+                        <div class="p-5">
+                            <span class="text-xs text-scotia-red font-semibold uppercase">Research</span>
+                            <h4 class="font-bold text-scotia-navy mt-2 text-sm leading-snug">Insights from the Scotiabank Utilities and Power Conference</h4>
+                            <p class="text-xs text-gray-500 mt-2">Jared Steinfeld and Andrew Weisel share insights on rising power demand, AI, growth and affordability.</p>
+                            <a href="#" class="text-scotia-red text-xs font-semibold mt-3 inline-flex items-center gap-1">Read more <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="insight-card bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                        <div class="bg-gradient-to-r from-red-50 to-white p-1"></div>
+                        <div class="p-5">
+                            <span class="text-xs text-scotia-red font-semibold uppercase">Financing</span>
+                            <h4 class="font-bold text-scotia-navy mt-2 text-sm leading-snug">Chile Day 2026: Connecting Chile with global capital markets</h4>
+                            <p class="text-xs text-gray-500 mt-2">Organized by InBest and Chile's Ministry of Finance, sponsored by Scotiabank for the fourth consecutive year.</p>
+                            <a href="#" class="text-scotia-red text-xs font-semibold mt-3 inline-flex items-center gap-1">Read more <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="insight-card bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                        <div class="bg-gradient-to-r from-red-50 to-white p-1"></div>
+                        <div class="p-5">
+                            <span class="text-xs text-scotia-red font-semibold uppercase">Advisory</span>
+                            <h4 class="font-bold text-scotia-navy mt-2 text-sm leading-snug">Scotiabank supports Kraken Robotics on its acquisition of the Covelya Group</h4>
+                            <p class="text-xs text-gray-500 mt-2">$615 million acquisition creates a global leader in mission-critical underwater technology.</p>
+                            <a href="#" class="text-scotia-red text-xs font-semibold mt-3 inline-flex items-center gap-1">Read more <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="insight-card bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                        <div class="bg-gradient-to-r from-red-50 to-white p-1"></div>
+                        <div class="p-5">
+                            <span class="text-xs text-scotia-red font-semibold uppercase">Research</span>
+                            <h4 class="font-bold text-scotia-navy mt-2 text-sm leading-snug">USMCA at a crossroads: Renegotiation paths reshaping North America</h4>
+                            <p class="text-xs text-gray-500 mt-2">Risks, macro impacts, and sector exposures from shifting trade dynamics.</p>
+                            <a href="#" class="text-scotia-red text-xs font-semibold mt-3 inline-flex items-center gap-1">Read more <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="insight-card bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                        <div class="bg-gradient-to-r from-red-50 to-white p-1"></div>
+                        <div class="p-5">
+                            <span class="text-xs text-scotia-red font-semibold uppercase">Research</span>
+                            <h4 class="font-bold text-scotia-navy mt-2 text-sm leading-snug">Focus on building Canada: Evaluating the Alto high-speed rail project</h4>
+                            <p class="text-xs text-gray-500 mt-2">Canada's $60&ndash;90 billion Alto high-speed rail project, its economic and environmental benefits.</p>
+                            <a href="#" class="text-scotia-red text-xs font-semibold mt-3 inline-flex items-center gap-1">Read more <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="insight-card bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                        <div class="bg-gradient-to-r from-red-50 to-white p-1"></div>
+                        <div class="p-5">
+                            <span class="text-xs text-scotia-red font-semibold uppercase">Research</span>
+                            <h4 class="font-bold text-scotia-navy mt-2 text-sm leading-snug">A look at the gold market</h4>
+                            <p class="text-xs text-gray-500 mt-2">Global Equity Research examines gold cycles over the past 50 years, noting key drivers and differences.</p>
+                            <a href="#" class="text-scotia-red text-xs font-semibold mt-3 inline-flex items-center gap-1">Read more <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Podcasts Tab -->
+            <div id="content-podcasts" class="tab-content">
+                <h2 class="text-2xl font-extrabold text-scotia-navy mb-2">Podcasts</h2>
+                <p class="text-gray-500 mb-8">Dive into the latest trends and expert analysis with the Scotiabank Market Points podcast series.</p>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4 bg-white p-5 rounded-xl border border-gray-100 shadow-sm insight-card">
+                        <div class="bg-scotia-navy text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-headphones"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-scotia-navy text-sm">2026 Debt Capital Markets Outlook</h4>
+                            <p class="text-xs text-gray-500 mt-1">Patrick Dabiet and Fadi Attia discuss the key forces shaping 2026 debt capital markets for issuers and institutional investors.</p>
+                            <a href="#" class="text-scotia-red text-xs font-semibold mt-2 inline-flex items-center gap-1">Listen <i class="fa-solid fa-play"></i></a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white p-5 rounded-xl border border-gray-100 shadow-sm insight-card">
+                        <div class="bg-scotia-navy text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-headphones"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-scotia-navy text-sm">Perspectives: How is AI reshaping the global economy?</h4>
+                            <p class="text-xs text-gray-500 mt-1">Unpacking a new Scotiabank report that lays out the potential impact of technological innovation.</p>
+                            <a href="#" class="text-scotia-red text-xs font-semibold mt-2 inline-flex items-center gap-1">Listen <i class="fa-solid fa-play"></i></a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white p-5 rounded-xl border border-gray-100 shadow-sm insight-card">
+                        <div class="bg-scotia-navy text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-headphones"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-scotia-navy text-sm">Powering intelligence: AI's energy footprint</h4>
+                            <p class="text-xs text-gray-500 mt-1">Patrick Bryden welcomes Digiconomist founder Alex de Vries-Gao to discuss AI's rising energy demands and sustainability implications.</p>
+                            <a href="#" class="text-scotia-red text-xs font-semibold mt-2 inline-flex items-center gap-1">Listen <i class="fa-solid fa-play"></i></a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white p-5 rounded-xl border border-gray-100 shadow-sm insight-card">
+                        <div class="bg-scotia-navy text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-headphones"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-scotia-navy text-sm">China's overcapacity problem: The LatAm ripple effect</h4>
+                            <p class="text-xs text-gray-500 mt-1">China's industrial shifts reshape LatAm exports&mdash;experts unpack the ripple effects on metals, mining, and trade.</p>
+                            <a href="#" class="text-scotia-red text-xs font-semibold mt-2 inline-flex items-center gap-1">Listen <i class="fa-solid fa-play"></i></a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white p-5 rounded-xl border border-gray-100 shadow-sm insight-card">
+                        <div class="bg-scotia-navy text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-headphones"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-scotia-navy text-sm">North to South: Simplifying trade and supply chain complexity</h4>
+                            <p class="text-xs text-gray-500 mt-1">From tariffs to tech shifts&mdash;discover how Scotiabank is helping firms conquer trade complexity across the Americas.</p>
+                            <a href="#" class="text-scotia-red text-xs font-semibold mt-2 inline-flex items-center gap-1">Listen <i class="fa-solid fa-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conferences Tab -->
+            <div id="content-conferences" class="tab-content">
+                <h2 class="text-2xl font-extrabold text-scotia-navy mb-2">Conferences</h2>
+                <p class="text-gray-500 mb-8">We bring senior executives from leading public companies together with their key institutional shareholders and our top-ranked analysts.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-6 insight-card">
+                        <div class="bg-scotia-red/10 text-scotia-red w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-bolt-lightning text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-scotia-navy">54th Annual Energy Conference</h4>
+                        <p class="text-sm text-gray-500 mt-1">February 25&ndash;26, 2026</p>
+                        <p class="text-sm text-gray-500">Miami, FL</p>
+                        <a href="#" class="text-scotia-red text-xs font-semibold mt-3 inline-flex items-center gap-1">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-6 insight-card">
+                        <div class="bg-scotia-red/10 text-scotia-red w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-microchip text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-scotia-navy">29th Annual TMT Conference</h4>
+                        <p class="text-sm text-gray-500 mt-1">March 3&ndash;4, 2026</p>
+                        <p class="text-sm text-gray-500">Toronto, ON</p>
+                        <a href="#" class="text-scotia-red text-xs font-semibold mt-3 inline-flex items-center gap-1">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-6 insight-card">
+                        <div class="bg-scotia-red/10 text-scotia-red w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-handshake text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-scotia-navy">Corporate Access</h4>
+                        <p class="text-sm text-gray-500 mt-2">Customized non-deal roadshow programs, strategic planning, industry conferences, bespoke tours, panels and group meetings.</p>
+                        <a href="#" class="text-scotia-red text-xs font-semibold mt-3 inline-flex items-center gap-1">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <a href="#" class="inline-flex items-center gap-2 text-scotia-red font-semibold text-sm mt-8">View all conferences <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-extrabold text-scotia-navy mb-8 text-center">Our Services</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <a href="#" class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:border-scotia-red/30 transition-all text-center group">
+                    <div class="bg-scotia-red/10 text-scotia-red w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-scotia-red group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-lightbulb text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-scotia-navy text-sm">Advisory</h4>
+                </a>
+                <a href="#" class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:border-scotia-red/30 transition-all text-center group">
+                    <div class="bg-scotia-red/10 text-scotia-red w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-scotia-red group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-hand-holding-dollar text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-scotia-navy text-sm">Financing</h4>
+                </a>
+                <a href="#" class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:border-scotia-red/30 transition-all text-center group">
+                    <div class="bg-scotia-red/10 text-scotia-red w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-scotia-red group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-globe text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-scotia-navy text-sm">Global Transaction Banking</h4>
+                </a>
+                <a href="#" class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:border-scotia-red/30 transition-all text-center group">
+                    <div class="bg-scotia-red/10 text-scotia-red w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-scotia-red group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-building-columns text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-scotia-navy text-sm">Prime Services</h4>
+                </a>
+                <a href="#" class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:border-scotia-red/30 transition-all text-center group">
+                    <div class="bg-scotia-red/10 text-scotia-red w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-scotia-red group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-chart-line text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-scotia-navy text-sm">Research &amp; Commentary</h4>
+                </a>
+                <a href="#" class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:border-scotia-red/30 transition-all text-center group">
+                    <div class="bg-scotia-red/10 text-scotia-red w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-scotia-red group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-shield-halved text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-scotia-navy text-sm">Risk Management</h4>
+                </a>
+                <a href="#" class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:border-scotia-red/30 transition-all text-center group">
+                    <div class="bg-scotia-red/10 text-scotia-red w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-scotia-red group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-arrow-right-arrow-left text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-scotia-navy text-sm">Sales &amp; Trading</h4>
+                </a>
+                <a href="#" class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md hover:border-scotia-red/30 transition-all text-center group">
+                    <div class="bg-scotia-red/10 text-scotia-red w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-scotia-red group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-leaf text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-scotia-navy text-sm">Sustainable Finance</h4>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers & Media CTA -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-8">
+                <h3 class="text-xl font-bold text-scotia-navy mb-2">Careers</h3>
+                <p class="text-gray-500 text-sm mb-4">Join an ever growing team</p>
+                <a href="#" class="inline-flex items-center gap-2 bg-scotia-red text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-scotia-darkred transition-colors">
+                    View opportunities <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-8">
+                <h3 class="text-xl font-bold text-scotia-navy mb-2">Media Center</h3>
+                <p class="text-gray-500 text-sm mb-4">Keep up to date</p>
+                <a href="#" class="inline-flex items-center gap-2 bg-scotia-navy text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-slate-700 transition-colors">
+                    View recent releases <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-scotia-navy text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="bg-scotia-red rounded-full w-7 h-7 flex items-center justify-center">
+                            <span class="text-white font-extrabold text-xs">S</span>
+                        </div>
+                        <span class="text-white font-bold">Scotiabank</span>
+                    </div>
+                    <p class="text-xs text-gray-500 max-w-md">Scotiabank is a marketing name for the global corporate and investment banking and capital markets businesses of The Bank of Nova Scotia and certain of its affiliates.</p>
+                </div>
+                <div class="flex flex-col md:flex-row gap-8 text-sm">
+                    <div>
+                        <h4 class="text-white font-semibold text-xs uppercase tracking-wider mb-3">Resources</h4>
+                        <div class="space-y-2">
+                            <a href="#" class="block hover:text-white transition-colors text-xs">Factsheet</a>
+                            <a href="#" class="block hover:text-white transition-colors text-xs">Marketing Presentation</a>
+                            <a href="#" class="block hover:text-white transition-colors text-xs">Investor Relations</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-semibold text-xs uppercase tracking-wider mb-3">Legal</h4>
+                        <div class="space-y-2">
+                            <a href="#" class="block hover:text-white transition-colors text-xs">Legal</a>
+                            <a href="#" class="block hover:text-white transition-colors text-xs">Privacy</a>
+                            <a href="#" class="block hover:text-white transition-colors text-xs">Accessibility</a>
+                            <a href="#" class="block hover:text-white transition-colors text-xs">Security &amp; Fraud</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-semibold text-xs uppercase tracking-wider mb-3">Connect</h4>
+                        <div class="space-y-2">
+                            <a href="#" class="block hover:text-white transition-colors text-xs">Scotiabank.com</a>
+                            <a href="#" class="block hover:text-white transition-colors text-xs">Careers</a>
+                            <a href="#" class="block hover:text-white transition-colors text-xs">Media Center</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-xs text-gray-500">
+                <p>&copy; 2026 The Bank of Nova Scotia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        document.getElementById('tab-' + tabName).classList.add('active');
+        document.getElementById('content-' + tabName).classList.add('active');
+    }
+    </script>
+</body>
+</html>
