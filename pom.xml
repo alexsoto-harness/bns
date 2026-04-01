@@ -15,7 +15,7 @@
     <artifactId>spring_boot_sample</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring_boot_sample</name>
-    <description>Scotiabank GBM Spring Boot Sample</description>
+    <description>Spring Boot sample for CI/CD and Kubernetes demos</description>
 
     <properties>
         <java.version>17</java.version>
@@ -25,6 +25,15 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

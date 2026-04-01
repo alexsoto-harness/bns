@@ -8,12 +8,32 @@ Spring Boot 3.2 demo app with a full CI/CD pipeline targeting Kubernetes.
 - **Docker** (Eclipse Temurin 17 Alpine)
 - **Kubernetes** (Go template manifests in `k8s/`)
 
+## Runtime configuration
+
+`/api/info` and `/api/config` read **environment variables on the pod**. Those values are wired from `env.config` in [`k8s/values.yaml`](k8s/values.yaml) (templated into a ConfigMap and mounted with `envFrom`).
+
+**Where Harness expressions go:** Harness resolves `<+...>` in **Values YAML** files, not in the raw Kubernetes templates under `k8s/templates/`. This repo’s service points at `k8s/values.yaml` via `valuesPaths` in [`.harness/service.yaml`](.harness/service.yaml). At deploy time, Harness substitutes expressions, then applies the manifests.
+
+**Optional service variables:** [`.harness/service.yaml`](.harness/service.yaml) defines `enableDarkMode`; [`k8s/values.yaml`](k8s/values.yaml) references it as `<+serviceVariables.enableDarkMode>`. You can change the default in the service or override it per environment in Harness without committing Git changes. Other keys use built-in pipeline/codebase expressions (see Harness [built-in variables](https://developer.harness.io/docs/platform/variables-and-expressions/harness-expressions-reference/) and [CI codebase variables](https://developer.harness.io/docs/continuous-integration/use-ci/codebase-configuration/built-in-cie-codebase-variables-reference/) for `codebase.commitSha`).
+
+| Variable | Source in this repo | Used for |
+|----------|---------------------|----------|
+| `GIT_COMMIT_SHA`, `GITHUB_SHA` | `"<+codebase.commitSha>"` in values (or swap for `<+trigger.commitSha>` / `<+manifest.k8s_templates.commitId>` if codebase is unavailable) | `gitSha` (first non-blank wins) |
+| `BUILD_ID` | `"<+pipeline.executionId>"` | `buildId` |
+| `RUN_NUMBER` | `"<+pipeline.sequenceId>"` | `buildId` (fallback after `BUILD_ID` in Java) |
+| `ENABLE_DARK_MODE` | `"<+serviceVariables.enableDarkMode>"` | JSON `enableDarkMode` |
+
 ## Endpoints
 
 | Path | Description |
 |------|-------------|
-| `/` | Static landing page |
-| `/api/info` | JSON health/info check |
+| `/` | Static demo page (API status panels) |
+| `/api/info` | JSON app metadata (version, optional git/build env vars) |
+| `/api/config` | JSON config (`ENABLE_DARK_MODE` → `enableDarkMode`) |
+| `POST /api/contact` | Demo form submit (logged, returns 202) |
+| `/actuator/health` | Actuator health |
+| `/actuator/health/liveness` | Kubernetes liveness probe |
+| `/actuator/health/readiness` | Kubernetes readiness probe |
 
 ## CI/CD
 
