@@ -32,3 +32,8 @@ service:
                 connectorRef: dockerhubalexsotoharness
                 imagePath: alexsotoharness/bns_spring_boot
                 tag: <+input>
+      variables:
+        - name: enableDarkMode
+          type: String
+          description: "Maps to pod env ENABLE_DARK_MODE (string true/false). Override per environment in Harness if needed."
+          value: "false"
