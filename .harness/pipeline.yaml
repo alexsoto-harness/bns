@@ -18,7 +18,6 @@ pipeline:
                 spec:
                   artifacts:
                     primary:
-                      primaryArtifactRef: bns_spring_boot_dockerhub
                       sources:
                         - identifier: bns_spring_boot_dockerhub
                           type: DockerRegistry
