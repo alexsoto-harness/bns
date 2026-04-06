@@ -1,0 +1,24 @@
+inputSet:
+  name: latest
+  identifier: latest
+  orgIdentifier: sandbox
+  projectIdentifier: soto_sandbox
+  pipeline:
+    identifier: bns_spring_boot_deploy
+    stages:
+      - stage:
+          identifier: deploy_to_dev
+          type: Deployment
+          spec:
+            service:
+              serviceInputs:
+                serviceDefinition:
+                  type: Kubernetes
+                  spec:
+                    artifacts:
+                      primary:
+                        sources:
+                          - identifier: bns_spring_boot_dockerhub
+                            type: DockerRegistry
+                            spec:
+                              tag: latest
