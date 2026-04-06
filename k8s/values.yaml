@@ -16,8 +16,8 @@ serviceTargetPort: 8080
 
 env:
   config:
-    GITHUB_SHA: "<+codebase.commitSha>"
+    GITHUB_SHA: "<+<+codebase.commitSha> != null ? <+codebase.commitSha> : <+artifact.tag>>"
     BUILD_ID: "<+pipeline.executionId>"
     RUN_NUMBER: "<+pipeline.sequenceId>"
     ENABLE_DARK_MODE: "<+serviceVariables.enableDarkMode>"
-    GIT_COMMIT_SHA: "<+manifest.k8s_templates.commitId>"
+    GIT_COMMIT_SHA: "<+<+codebase.commitSha> != null ? <+codebase.commitSha> : <+artifact.tag>>"
