@@ -18,7 +18,7 @@ Spring Boot 3.2 demo app with a full CI/CD pipeline targeting Kubernetes.
 
 | Variable | Source in this repo | Used for |
 |----------|---------------------|----------|
-| `GIT_COMMIT_SHA`, `GITHUB_SHA` | `"<+codebase.commitSha>"` in values (or swap for `<+trigger.commitSha>` / `<+manifest.k8s_templates.commitId>` if codebase is unavailable) | `gitSha` (first non-blank wins) |
+| `GIT_COMMIT_SHA`, `GITHUB_SHA` | Both use `"<+codebase.commitSha>"` in [`k8s/values.yaml`](k8s/values.yaml) | `gitSha` (first non-blank wins) |
 | `BUILD_ID` | `"<+pipeline.executionId>"` | `buildId` |
 | `RUN_NUMBER` | `"<+pipeline.sequenceId>"` | `buildId` (fallback after `BUILD_ID` in Java) |
 | `ENABLE_DARK_MODE` | `"<+serviceVariables.enableDarkMode>"` | JSON `enableDarkMode` |
@@ -48,6 +48,10 @@ Spring Boot 3.2 demo app with a full CI/CD pipeline targeting Kubernetes.
 4. **Prod** — rolling deploy to GKE prod cluster
 
 A webhook trigger (`.harness/trigger.yaml`) automatically kicks off the Harness pipeline when a new Docker image is pushed.
+
+**Harness CD and `values.yaml` expressions:** `k8s/values.yaml` uses `<+codebase.commitSha>` for git metadata. That resolves when the **pipeline** defines a **codebase** (same Git connector and repo as the service manifests, e.g. `bns`). Add it under **Pipeline → Pipeline Studio → (YAML) → `properties.ci.codebase`**, or mirror [`.harness/pipeline.yaml`](.harness/pipeline.yaml) if you use Git-backed pipeline definitions. Without a codebase, those expressions can fail at deploy time (similar to the old `manifest.k8s_templates.commitId` error on pipelines like `zest`).
+
+**GitHub Actions vs Harness CI:** Only Harness substitutes `<+...>` when it renders Helm/K8s values at deploy time. Whether the image was built in GitHub Actions or in Harness does not matter; the CD pipeline still needs a resolvable commit source. If you use **Git** webhooks and do not want a pipeline codebase, you can instead set both `GITHUB_SHA` and `GIT_COMMIT_SHA` in `k8s/values.yaml` to `"<+trigger.commitSha>"` (Git-triggered runs only).
 
 ## Local Development
 

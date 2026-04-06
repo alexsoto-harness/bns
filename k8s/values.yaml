@@ -16,8 +16,9 @@ serviceTargetPort: 8080
 
 env:
   config:
+    # Both SHAs use codebase.commitSha (see README); avoid manifest.*.commitId — often unresolved on CD-only runs.
     GITHUB_SHA: "<+codebase.commitSha>"
     BUILD_ID: "<+pipeline.executionId>"
     RUN_NUMBER: "<+pipeline.sequenceId>"
     ENABLE_DARK_MODE: "<+serviceVariables.enableDarkMode>"
-    GIT_COMMIT_SHA: "<+manifest.k8s_templates.commitId>"
+    GIT_COMMIT_SHA: "<+codebase.commitSha>"
