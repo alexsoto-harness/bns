@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_bns_1781740087183-push-trigger-input-set
+  identifier: Build_bns_1781740087183pushtriggerinputset
+  orgIdentifier: sandbox
+  projectIdentifier: soto_sandbox
+  pipeline:
+    identifier: Build_bns_1781740087183
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
