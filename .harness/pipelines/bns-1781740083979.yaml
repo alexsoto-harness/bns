@@ -1,0 +1,33 @@
+pipeline:
+  name: Build bns
+  identifier: Build_bns_1781740087183
+  projectIdentifier: soto_sandbox
+  orgIdentifier: sandbox
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Echo Welcome Message
+                  identifier: Echo_Welcome_Message
+                  spec:
+                    shell: Sh
+                    command: echo "Welcome to Harness CI"
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: alexsotoharness
+        repoName: bns
+        build: <+input>
